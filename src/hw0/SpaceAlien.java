@@ -9,25 +9,44 @@ package hw0;
  * @version January 2024
  */
 
-public class SpaceAlien {
-    // the name of the alien's home planet
-    private String homePlanet;
+public class SlimeSpaceAlien extends SpaceAlien implements ZapsWithSlime {
 
-    // Distance of the home planet from earth, in light years
-    private double distanceFromEarth;
+    // New field to represent the color of the slime
+    private String slimeType;
 
-    public SpaceAlien(String homePlanet, double distanceFromEarth) {
-        this.homePlanet = homePlanet;
-        this.distanceFromEarth = distanceFromEarth;
+    public SlimySpaceAlien(String homePlanet, double distanceFromEarth, String slimeType) {
+        super(homePlanet, distanceFromEarth);
+        this.slimeType = slimeType;
     }
 
+    
+    @Override
     public void doGreeting() {
-        System.out.println("Greetings form planet " + homePlanet + ", "
-                + distanceFromEarth + " light years away");
+        super.doGreeting();
+        System.out.println("We come with slime!");
+    }
+
+    // Implement the doSlimeZap method from ZapsWithSlime interface
+    @Override
+    public String doSlimeZap(int numHumans) {
+        if (numHumans == 1) {
+            return "Zap! Human covered with " + slimeType + " slime. Blech!";
+        } else {
+            return "Zap! Humans covered with " + slimeType + " slime. BLECHHHH!";
+        }
+    }
+
+    // Implement the slimeWholeEarth method from ZapsWithSlime interface
+    @Override
+    public String slimeWholeEarth() {
+        return "The Slime Star is activated. Earth is covered with " + slimeType + " slime!";
     }
 
     public static void main(String[] args) {
-        SpaceAlien descolada = new SpaceAlien("Lusitania", 42);
-        descolada.doGreeting();
+        SlimySpaceAlien slimyAlien = new SlimySpaceAlien("Slime World", 100, "Poison");
+        slimyAlien.doGreeting();
+        System.out.println(slimyAlien.doSlimeZap(3));
+        System.out.println(slimyAlien.slimeWholeEarth());
     }
 }
+
